@@ -1,0 +1,56 @@
+import java.util.*;
+import java.util.Collections;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        // 输入数组
+        //int[] nums = new int[] {14,18,11,14,12,13};
+        int[] nums = new int[] {6,5,2,1,7,4,9,10,4};
+        //int[] nums = new int[] {4,8,6,7,8}
+
+        //转换为ArrayList，方便对数组进行删除
+        ArrayList<Integer> bagList = new ArrayList<Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            bagList.add(nums[i]);
+        }
+        //对数组进行排序
+        Collections.sort(bagList);
+        //定义箱子的容量
+        int tankSize = 12;
+        //记录箱子的数量
+        int count = 0;
+        //当未装箱的钻石数量小于等于1时，停止循环
+        while (bagList.size() > 1) {
+            //装箱
+            inTank(bagList, tankSize);
+            //箱子数量加一
+            count ++;
+        }
+        //因为还有一个钻石，则还需要一个箱子
+        count ++;
+        System.out.println(count);
+    }
+        /**
+     * 模拟装箱操作（默认先将最大的钻石装入箱子，然后依次装入最小的钻石，当和大于容量时，停止并移除已装箱的钻石）
+     * @param bagList 未装箱钻石数组
+     * @param tankSize 箱子的容量
+     */
+    public static void inTank( ArrayList bagList, int tankSize) {
+        Integer sum = 0, max = 0;
+        //保存数组的size
+        max = bagList.size() - 1;
+        //将最大值给sum
+        sum = (Integer)bagList.get(bagList.size()-1);
+        for (int i = 0; i < max; i++) {
+            //如果和小于箱子容量，移除已装箱钻石；否的话移除最大值跳出循环
+            if ((sum + (Integer)bagList.get(0)) <= tankSize){
+               sum = sum + (Integer)bagList.get(0);
+               bagList.remove(0);
+            } else {
+                bagList.remove(bagList.size()-1);
+                break;
+            }
+        }
+    }
+}
