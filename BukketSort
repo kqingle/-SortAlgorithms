@@ -1,0 +1,23 @@
+public class bucketsort {
+    /**
+     * 桶排序
+     * @param nums
+     * @param range
+     */
+    public void bucketsort (int[] nums, int range){
+        int[] book = new int[range];
+        for (int i = 0; i < range - 1; i++) {
+            book[i] = 0;
+        }
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] < range){
+                book[nums[j]] ++;
+            }
+        }
+        for (int k = 0; k < range; k++) {
+            for (int i = 0; i < book[k]; i++) {
+                System.out.println(k);
+            }
+        }
+    }
+}
