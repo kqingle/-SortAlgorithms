@@ -1,0 +1,29 @@
+public class QuickSort {
+    public void quickSort(int[] nums, int low, int high){
+        if (low > high){
+            return;
+        }
+        int j = high;
+        int i = low;
+        int baseValue = nums[low];
+        while (i != j){
+            while (nums[j] >= baseValue && i < j){
+                j--;
+            }
+            while (nums[i] <= baseValue && i < j){
+                i++;
+            }
+            if (i < j){
+                swap(nums, i, j);
+            }
+        }
+        swap(nums, i, low);
+        quickSort(nums,low,i-1);
+        quickSort(nums,i+1,high);
+    }
+    public void swap(int[] num,int x, int y){
+        int temp = num[x];
+        num[x] = num[y];
+        num[y] = temp;
+    }
+}
